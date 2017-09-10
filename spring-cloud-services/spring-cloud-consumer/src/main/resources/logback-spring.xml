@@ -27,10 +27,11 @@
 
 	<!-- 打印级别，大小写无关：TRACE, DEBUG, INFO, WARN, ERROR, ALL 和 OFF 默认是DEBUG -->
 	<root level="ERROR">
+		<appender-ref ref="Console"/>
 		<appender-ref ref="File"/>
 	</root>
 	
-	<logger name="cn.charlie166.learn" level="DEBUG">
+	<logger name="cn.charlie166.learn" level="DEBUG" additivity="false">
 		<appender-ref ref="Console"/>
 	</logger>
 

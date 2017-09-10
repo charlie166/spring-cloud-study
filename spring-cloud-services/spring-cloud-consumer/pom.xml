@@ -50,6 +50,10 @@
 		    <artifactId>okhttp</artifactId>
 		</dependency>
 		<dependency>
+		    <groupId>org.springframework.boot</groupId>
+		    <artifactId>spring-boot-starter-redis</artifactId>
+		</dependency>
+		<dependency>
     		<groupId>cn.charlie166.learn.spring.cloud</groupId>
 		  	<artifactId>spring-cloud-dto</artifactId>
 		  	<version>${project.version}</version>

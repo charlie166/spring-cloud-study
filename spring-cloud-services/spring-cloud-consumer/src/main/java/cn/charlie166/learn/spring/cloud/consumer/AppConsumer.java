@@ -13,8 +13,7 @@ import org.springframework.context.annotation.ComponentScan;
 @EnableFeignClients
 @EnableHystrixDashboard
 @EnableCircuitBreaker
-@ComponentScan(basePackages = {"cn.charlie166.learn.spring.cloud.consumer.config",
-	"cn.charlie166.learn.spring.cloud.consumer.remote.hystrix", "cn.charlie166.learn.spring.cloud.consumer.controller"})
+@ComponentScan(basePackages = {"cn.charlie166.learn.spring.cloud.consumer"})
 public class AppConsumer {
 	
     public static void main( String[] args ) {
