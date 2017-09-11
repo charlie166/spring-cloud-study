@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration debug="true" scan="true" scanPeriod="1000 seconds">
+	<timestamp key="date" datePattern="yyyyMMdd"/>
+	<property name="log_file_direction" value="F:/rato/logger/MYOS/logs"/>
+	<!-- Output to Console -->
+	<appender name="Console" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>%d{yyyy-MM-dd HH:mm:ss} %level %c:%L - %msg%n</pattern>
+		</encoder>
+	</appender>
+
+	<!-- Output to File -->
+	<appender name="File" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<File>${log_file_direction}/MYOS.log</File>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<FileNamePattern>
+				${log_file_direction}/MYOS.%d{yyyy-MM-dd}.log
+			</FileNamePattern>
+			<!-- keep 1 days worth of history -->
+			<MaxHistory>10</MaxHistory>
+		</rollingPolicy>
+		<encoder>
+			<pattern>%d{yyyy-MM-dd HH:mm:ss} %level %c:%L - %msg%n</pattern>
+			<charset>UTF-8</charset>
+		</encoder>
+	</appender>
+
+	<!-- 打印级别，大小写无关：TRACE, DEBUG, INFO, WARN, ERROR, ALL 和 OFF 默认是DEBUG -->
+	<root level="ERROR">
+		<appender-ref ref="Console"/>
+		<appender-ref ref="File"/>
+	</root>
+	
+	<logger name="cn.charlie166.learn" level="DEBUG" additivity="false">
+		<appender-ref ref="Console"/>
+	</logger>
+	
+	<!-- 容器日志 -->
+	<logger name="org.springframework.boot.context.embedded.tomcat" level="DEBUG" additivity="false">
+		<appender-ref ref="Console"/>
+	</logger>
+
+</configuration>
