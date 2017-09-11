@@ -34,5 +34,10 @@
 	<logger name="cn.charlie166.learn" level="DEBUG" additivity="false">
 		<appender-ref ref="Console"/>
 	</logger>
+	
+	<!-- 容器日志 -->
+	<logger name="org.springframework.boot.context.embedded.tomcat" level="DEBUG" additivity="false">
+		<appender-ref ref="Console"/>
+	</logger>
 
 </configuration>
