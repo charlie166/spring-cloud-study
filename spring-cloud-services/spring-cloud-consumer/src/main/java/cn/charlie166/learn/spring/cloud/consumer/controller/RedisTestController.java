@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import cn.charlie166.learn.spring.cloud.consumer.redis.entity.RedisTest;
 import cn.charlie166.learn.spring.cloud.consumer.service.RedisTestService;
 
 /**
@@ -46,5 +47,28 @@ public class RedisTestController {
 	@RequestMapping(value = "/get/{key}")
 	public Object getOne(@PathVariable(value = "key") String key) {
 		return redisService.get(key);
+	}
+	
+	/**
+	* @Title: saveRef 
+	* @Description: 保存关联关系
+	* @param param
+	* @return
+	 */
+	@RequestMapping(value = "/ref/save")
+	public Object saveRef(@RequestBody RedisTest param){
+		return redisService.saveRef(param);
+	}
+	
+	/**
+	* @Title: refById 
+	* @Description: 通过ID查询
+	* @param id
+	* @return
+	 */
+	@RequestMapping(value = "/ref/get/{id}")
+	public Object refById(@PathVariable(value = "id") String id){
+		RedisTest rt = redisService.refById(id);
+		return rt != null ? rt : "null";
 	}
 }

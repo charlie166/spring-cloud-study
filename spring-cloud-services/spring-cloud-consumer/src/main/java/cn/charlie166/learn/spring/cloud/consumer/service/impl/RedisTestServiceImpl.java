@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import cn.charlie166.learn.spring.cloud.consumer.dao.RedisDao;
+import cn.charlie166.learn.spring.cloud.consumer.redis.dao.RedisTestDao;
+import cn.charlie166.learn.spring.cloud.consumer.redis.entity.RedisTest;
 import cn.charlie166.learn.spring.cloud.consumer.service.RedisTestService;
 
 /**
@@ -21,6 +23,8 @@ public class RedisTestServiceImpl implements RedisTestService{
 
 	@Autowired
 	private RedisDao redisDao;
+	@Autowired
+	private RedisTestDao redisTestDao;
 	
 	@Override
 	public void save(String key, Object val) {
@@ -30,6 +34,16 @@ public class RedisTestServiceImpl implements RedisTestService{
 	@Override
 	public Object get(String key) {
 		return StringUtils.isNotBlank(key) ? redisDao.get(key) : null;
+	}
+
+	@Override
+	public RedisTest saveRef(RedisTest redisTest) {
+		return redisTestDao.save(redisTest);
+	}
+
+	@Override
+	public RedisTest refById(String id) {
+		return redisTestDao.findOne(id);
 	}
 
 }
