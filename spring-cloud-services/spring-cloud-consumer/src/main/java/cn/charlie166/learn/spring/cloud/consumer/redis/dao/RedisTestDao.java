@@ -23,5 +23,5 @@ public interface RedisTestDao extends CrudRepository<RedisTest, String>{
 	* @param name 模糊查询关键字
 	* @return 匹配的列表
 	 */
-	public List<RedisTest> findByName(String name);
+	public List<RedisTest> name(String name);
 }

@@ -16,7 +16,7 @@ import org.springframework.data.redis.core.index.Indexed;
 * @date 2017年9月11日 
 *
  */
-@RedisHash(value = "redisTest", timeToLive = 60)
+@RedisHash(value = "redisTest", timeToLive = -1)
 public class RedisTest{
 
 	@Id

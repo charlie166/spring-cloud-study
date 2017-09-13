@@ -1,8 +1,11 @@
 package cn.charlie166.learn.spring.cloud.consumer.service.impl;
 
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +24,8 @@ import cn.charlie166.learn.spring.cloud.consumer.service.RedisTestService;
 @Service
 public class RedisTestServiceImpl implements RedisTestService{
 
+	private Logger logger = LoggerFactory.getLogger(this.getClass());
+	
 	@Autowired
 	private RedisDao redisDao;
 	@Autowired
@@ -43,6 +48,8 @@ public class RedisTestServiceImpl implements RedisTestService{
 
 	@Override
 	public RedisTest refById(String id) {
+		List<RedisTest> list = redisTestDao.name("混合");
+		logger.debug("列表结果:" + list.size());
 		return redisTestDao.findOne(id);
 	}
 
