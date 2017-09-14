@@ -22,6 +22,11 @@ public class RedisDaoImpl implements RedisDao{
 	private RedisTemplate<String, Object> redisTemplate;
 
 	@Override
+	public RedisTemplate<String, Object> getTemplate(){
+		return this.redisTemplate;
+	}
+	
+	@Override
 	public void save(String key, Object val) {
 		redisTemplate.opsForValue().set(key, val);
 	}
@@ -34,6 +39,11 @@ public class RedisDaoImpl implements RedisDao{
 	@Override
 	public Object get(String key) {
 		return redisTemplate.opsForValue().get(key);
+	}
+
+	@Override
+	public Object getHash(String key, String hashKey) {
+		return redisTemplate.opsForHash().get(key, hashKey);
 	}
 	
 }

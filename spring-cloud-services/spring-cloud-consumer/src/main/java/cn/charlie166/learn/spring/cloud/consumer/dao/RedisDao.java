@@ -2,6 +2,8 @@ package cn.charlie166.learn.spring.cloud.consumer.dao;
 
 import java.util.concurrent.TimeUnit;
 
+import org.springframework.data.redis.core.RedisTemplate;
+
 /**
  * @description redis数据操作接口
  * @author <a href="mailto:charlie166@163.com">李阳</a> 
@@ -39,4 +41,20 @@ public interface RedisDao {
 	 * @since spring-cloud-consumer 1.0.0
 	 */
 	public Object get(String key);
+	
+	/**
+	* @Title: getHash 
+	* @Description: 获取hash对象
+	* @param key
+	* @param hashKey
+	* @return
+	 */
+	public Object getHash(String key, String hashKey);
+	
+	/**
+	* @Title: getTemplate 
+	* @Description:
+	* @return
+	 */
+	public RedisTemplate<String, Object> getTemplate();
 }
