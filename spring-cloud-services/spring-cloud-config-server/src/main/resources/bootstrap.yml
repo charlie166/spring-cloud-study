@@ -1,0 +1,18 @@
+eureka:
+  server:
+    url: http://192.168.0.144:8000
+  client:
+    serviceUrl:
+      defaultZone: http://192.168.0.144:8000/eureka
+server:
+  port: 8040
+spring:
+  application:
+    name: spring-cloud-config-server
+  profiles:
+    active: native
+  cloud:
+    config:
+      server:
+        native:
+          searchLocations: file:F:/charlie/documents/java/proj/cloud/config

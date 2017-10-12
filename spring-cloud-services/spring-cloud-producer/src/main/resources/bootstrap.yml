@@ -1,0 +1,22 @@
+server:
+  port: 9101
+  host: &server_host http://192.168.0.144:8000/eureka
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: *server_host
+spring:
+  application:
+    name: spring-cloud-producer
+  profiles:
+    active: default
+  cloud:
+    config:
+      name: common
+      profile: test
+      #从注册中心读取配置
+      #uri: http://localhost:8040/
+      label: label
+      discovery:
+        enabled: true
+        serviceId: spring-cloud-config-server
