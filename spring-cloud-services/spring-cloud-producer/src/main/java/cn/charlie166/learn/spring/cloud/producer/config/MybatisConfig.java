@@ -3,11 +3,10 @@ package cn.charlie166.learn.spring.cloud.producer.config;
 import javax.sql.DataSource;
 
 import org.mybatis.spring.SqlSessionFactoryBean;
-import org.springframework.beans.factory.annotation.Value;
+import org.mybatis.spring.mapper.MapperScannerConfigurer;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.core.io.DefaultResourceLoader;
 
 import com.zaxxer.hikari.HikariDataSource;
 
@@ -23,31 +22,34 @@ import com.zaxxer.hikari.HikariDataSource;
 @Configuration
 public class MybatisConfig {
 
-	@Value(value = "${jdbc.driver:}")
-	private String driverClassName;
-	@Value(value = "${jdbc.url}")
-	private String jdbcUrl;
-	@Value(value = "${jdbc.username}")
-	private String username;
-	@Value(value = "${jdbc.password}")
-	private String password;
+	/**sql会话工厂bean的名称**/
+	public static final String SQL_SESSION_FACTORY_NAME = "sqlSessionFactory";
 	
 	@Bean
-	public DataSource hikariDataSource(){
+	public DataSource hikariDataSource(@Autowired MybatisProp prop){
 		HikariDataSource ds = new HikariDataSource();
-		ds.setDriverClassName(driverClassName);
-		ds.setJdbcUrl(jdbcUrl);
-		ds.setUsername(username);
-		ds.setPassword(password);
+		ds.setDriverClassName(prop.getDriverClassName());
+		ds.setJdbcUrl(prop.getJdbcUrl());
+		ds.setUsername(prop.getUsername());
+		ds.setPassword(prop.getPassword());
 		return ds;
 	}
 	
-	@Bean(name = "sqlSessionFactory")
-	public SqlSessionFactoryBean getSqlSessionFactoryBean(){
+	@Bean(name = MybatisConfig.SQL_SESSION_FACTORY_NAME)
+	public SqlSessionFactoryBean getSqlSessionFactoryBean(@Autowired MybatisProp prop){
 		SqlSessionFactoryBean fb = new SqlSessionFactoryBean();
-		fb.setDataSource(this.hikariDataSource());
-		DefaultResourceLoader drl = new DefaultResourceLoader();
-		fb.setConfigLocation(new ClassPathResource("mybatis-config.xml"));
+		fb.setDataSource(this.hikariDataSource(prop));
+		fb.setConfigLocation(prop.getConfigLocation());
+		fb.setMapperLocations(prop.getMapperLocations());
 		return fb;
 	}
+	
+	@Bean
+	public MapperScannerConfigurer scannerConfigurer(){
+		MapperScannerConfigurer config = new MapperScannerConfigurer();
+		config.setSqlSessionFactoryBeanName(MybatisConfig.SQL_SESSION_FACTORY_NAME);
+		config.setBasePackage("cn.charlie166.learn.spring.cloud.producer.dao");
+		return config;
+	}
+	
 }

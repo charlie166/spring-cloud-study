@@ -15,4 +15,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @RunWith(value = SpringJUnit4ClassRunner.class)
 public class MainTest {
 
+	public void testMain(){
+	}
 }
