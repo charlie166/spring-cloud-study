@@ -5,7 +5,6 @@ import javax.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.core.io.Resource;
-import org.springframework.stereotype.Component;
 
 /**
 * @ClassName: MybatisProp 
@@ -17,7 +16,6 @@ import org.springframework.stereotype.Component;
 *
  */
 @ConfigurationProperties(prefix = "jdbc")
-@Component
 public class MybatisProp {
 
 	@Value(value = "${jdbc.driver:}")

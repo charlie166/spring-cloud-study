@@ -3,7 +3,6 @@ package cn.charlie166.learn.spring.cloud.producer.config;
 import javax.sql.DataSource;
 
 import org.mybatis.spring.SqlSessionFactoryBean;
-import org.mybatis.spring.mapper.MapperScannerConfigurer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -25,8 +24,11 @@ public class MybatisConfig {
 	/**sql会话工厂bean的名称**/
 	public static final String SQL_SESSION_FACTORY_NAME = "sqlSessionFactory";
 	
+	@Autowired
+	private MybatisProp prop;
+	
 	@Bean
-	public DataSource hikariDataSource(@Autowired MybatisProp prop){
+	public DataSource hikariDataSource(){
 		HikariDataSource ds = new HikariDataSource();
 		ds.setDriverClassName(prop.getDriverClassName());
 		ds.setJdbcUrl(prop.getJdbcUrl());
@@ -36,20 +38,12 @@ public class MybatisConfig {
 	}
 	
 	@Bean(name = MybatisConfig.SQL_SESSION_FACTORY_NAME)
-	public SqlSessionFactoryBean getSqlSessionFactoryBean(@Autowired MybatisProp prop){
+	public SqlSessionFactoryBean getSqlSessionFactoryBean(){
 		SqlSessionFactoryBean fb = new SqlSessionFactoryBean();
-		fb.setDataSource(this.hikariDataSource(prop));
+		fb.setDataSource(this.hikariDataSource());
 		fb.setConfigLocation(prop.getConfigLocation());
 		fb.setMapperLocations(prop.getMapperLocations());
 		return fb;
-	}
-	
-	@Bean
-	public MapperScannerConfigurer scannerConfigurer(){
-		MapperScannerConfigurer config = new MapperScannerConfigurer();
-		config.setSqlSessionFactoryBeanName(MybatisConfig.SQL_SESSION_FACTORY_NAME);
-		config.setBasePackage("cn.charlie166.learn.spring.cloud.producer.dao");
-		return config;
 	}
 	
 }
