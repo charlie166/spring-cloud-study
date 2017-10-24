@@ -4,6 +4,7 @@ import org.mybatis.spring.mapper.MapperScannerConfigurer;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -17,6 +18,7 @@ import cn.charlie166.learn.spring.cloud.producer.config.ServiceConfig;
 @SpringBootApplication
 @EnableDiscoveryClient
 @EnableConfigurationProperties(MybatisProp.class)
+@EnableCaching
 @Import(value = {MybatisConfig.class, ServiceConfig.class, ControllerConfig.class})
 @ComponentScan(basePackages = {})
 public class AppProducer {

@@ -1,16 +1,12 @@
 package cn.charlie166.learn.spring.cloud.producer.service.impl;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-
-import javax.sql.DataSource;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import cn.charlie166.learn.spring.cloud.producer.dao.DemoDao;
+import cn.charlie166.learn.spring.cloud.producer.domain.Demo;
 import cn.charlie166.learn.spring.cloud.producer.service.inter.DemoService;
 
 /**
@@ -28,21 +24,19 @@ public class DemoServiceImpl implements DemoService {
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	@Autowired
-	private DataSource dataSource;
+	private DemoDao demoDao;
 	
 	@Override
 	public void testQuery() {
-		try {
-			PreparedStatement ps = dataSource.getConnection().prepareStatement("SELECT COUNT(id) FROM demo",
-				ResultSet.TYPE_SCROLL_INSENSITIVE, 
-				ResultSet.CONCUR_READ_ONLY);
-			ResultSet rs = ps.executeQuery();
-			if(rs.first()){
-				logger.debug("结果:" + rs.getInt(1));
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+		int lastId = demoDao.selectMaxId();
+		Demo newDemo = new Demo();
+		newDemo.setId(++ lastId);
+		newDemo.setName("名称" + lastId);
+		newDemo.setAddress("地址:" + lastId);
+		int result = demoDao.insertDemo(newDemo);
+		logger.debug("当前条数before:" + demoDao.selectCount());
+		logger.debug("新增结果:{}", result);
+		logger.debug("当前条数before:" + demoDao.selectCount());
 	}
 
 }
