@@ -14,12 +14,13 @@ import cn.charlie166.learn.spring.cloud.producer.config.ControllerConfig;
 import cn.charlie166.learn.spring.cloud.producer.config.MybatisConfig;
 import cn.charlie166.learn.spring.cloud.producer.config.MybatisProp;
 import cn.charlie166.learn.spring.cloud.producer.config.ServiceConfig;
+import cn.charlie166.learn.spring.cloud.producer.config.SpringCacheConfig;
 
 @SpringBootApplication
 @EnableDiscoveryClient
 @EnableConfigurationProperties(MybatisProp.class)
 @EnableCaching
-@Import(value = {MybatisConfig.class, ServiceConfig.class, ControllerConfig.class})
+@Import(value = {MybatisConfig.class, ServiceConfig.class, ControllerConfig.class, SpringCacheConfig.class})
 @ComponentScan(basePackages = {})
 public class AppProducer {
 	

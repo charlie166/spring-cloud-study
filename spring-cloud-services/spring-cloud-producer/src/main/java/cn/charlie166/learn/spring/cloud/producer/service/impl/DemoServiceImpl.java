@@ -29,14 +29,15 @@ public class DemoServiceImpl implements DemoService {
 	@Override
 	public void testQuery() {
 		int lastId = demoDao.selectMaxId();
+		logger.debug("当前条数before:" + demoDao.selectCount() + "----lastId:" + lastId);
 		Demo newDemo = new Demo();
 		newDemo.setId(++ lastId);
 		newDemo.setName("名称" + lastId);
 		newDemo.setAddress("地址:" + lastId);
 		int result = demoDao.insertDemo(newDemo);
-		logger.debug("当前条数before:" + demoDao.selectCount());
 		logger.debug("新增结果:{}", result);
-		logger.debug("当前条数before:" + demoDao.selectCount());
+		logger.debug("当前条数before:" + demoDao.selectCount() + "----lastId:" + lastId);
+		logger.debug("cache:" + demoDao.selectCount());
 	}
 
 }
