@@ -8,19 +8,13 @@ import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Import;
-
-import cn.charlie166.learn.spring.cloud.producer.config.ControllerConfig;
 import cn.charlie166.learn.spring.cloud.producer.config.MybatisConfig;
 import cn.charlie166.learn.spring.cloud.producer.config.MybatisProp;
-import cn.charlie166.learn.spring.cloud.producer.config.ServiceConfig;
-import cn.charlie166.learn.spring.cloud.producer.config.SpringCacheConfig;
 
 @SpringBootApplication
 @EnableDiscoveryClient
 @EnableConfigurationProperties(MybatisProp.class)
 @EnableCaching
-@Import(value = {MybatisConfig.class, ServiceConfig.class, ControllerConfig.class, SpringCacheConfig.class})
 @ComponentScan(basePackages = {})
 public class AppProducer {
 	
