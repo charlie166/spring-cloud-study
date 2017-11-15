@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import cn.charlie166.learn.spring.cloud.producer.config.redis.RedisDao;
 import cn.charlie166.learn.spring.cloud.producer.dao.DemoDao;
 import cn.charlie166.learn.spring.cloud.producer.domain.Demo;
 import cn.charlie166.learn.spring.cloud.producer.service.inter.DemoService;
@@ -25,6 +26,9 @@ public class DemoServiceImpl implements DemoService {
 	
 	@Autowired
 	private DemoDao demoDao;
+	
+	@Autowired
+	private RedisDao redisDao;
 	
 	@Override
 	public void testQuery() {

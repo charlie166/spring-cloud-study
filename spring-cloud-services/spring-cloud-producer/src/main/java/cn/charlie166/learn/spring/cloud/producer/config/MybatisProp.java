@@ -1,7 +1,5 @@
 package cn.charlie166.learn.spring.cloud.producer.config;
 
-import javax.annotation.PostConstruct;
-
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.core.io.Resource;
@@ -64,11 +62,6 @@ public class MybatisProp {
 	}
 	public void setMapperLocations(Resource[] mapperLocations) {
 		this.mapperLocations = mapperLocations;
-	}
-	
-	@PostConstruct
-	public void postCon(){
-		System.out.println("post of mybatis prop ....................");
 	}
 	
 }	

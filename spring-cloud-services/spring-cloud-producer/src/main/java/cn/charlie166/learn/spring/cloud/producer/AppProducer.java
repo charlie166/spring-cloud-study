@@ -15,7 +15,7 @@ import cn.charlie166.learn.spring.cloud.producer.config.MybatisProp;
 @EnableDiscoveryClient
 @EnableConfigurationProperties(MybatisProp.class)
 @EnableCaching
-@ComponentScan(basePackages = {})
+@ComponentScan(basePackages = {"cn.charlie166.learn.spring.cloud.producer.config.redis"}, includeFilters = {})
 public class AppProducer {
 	
     public static void main( String[] args ) {
